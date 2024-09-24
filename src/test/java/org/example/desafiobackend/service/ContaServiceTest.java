@@ -23,10 +23,8 @@ public class ContaServiceTest {
 
     @Mock
     private ContaRepository contaRepository;
-
     @InjectMocks
     private ContaService contaService;
-
     private Conta conta;
 
     @BeforeEach
