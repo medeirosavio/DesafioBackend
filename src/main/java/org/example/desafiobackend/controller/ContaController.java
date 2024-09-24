@@ -1,11 +1,13 @@
 package org.example.desafiobackend.controller;
 
 import org.example.desafiobackend.domain.model.Conta;
+import org.example.desafiobackend.service.ContaImportService;
 import org.example.desafiobackend.service.ContaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -16,6 +18,8 @@ public class ContaController {
 
     @Autowired
     private ContaService contaService;
+    @Autowired
+    private ContaImportService contaImportService;
 
     @PostMapping
     public ResponseEntity<Conta> cadastrarConta(@RequestBody Conta conta) {
@@ -56,6 +60,16 @@ public class ContaController {
             @RequestParam LocalDate dataFim) {
         Double total = contaService.obterTotalPagoPorPeriodo(dataInicio, dataFim);
         return ResponseEntity.ok(total);
+    }
+
+    @PostMapping("/importar")
+    public ResponseEntity<String> importarContas(@RequestParam("file") MultipartFile file) {
+        try {
+            contaImportService.importContas(file);
+            return ResponseEntity.ok("Contas importadas com sucesso.");
+        } catch (Exception e) {
+            return ResponseEntity.status(500).body("Erro ao importar contas: " + e.getMessage());
+        }
     }
 
 }
