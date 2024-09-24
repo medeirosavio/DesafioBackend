@@ -17,4 +17,7 @@ public interface ContaRepository extends JpaRepository<Conta, Long> {
     List<Conta> findByDataVencimentoAndDescricao(@Param("dataVencimento") LocalDate dataVencimento,
                                                  @Param("descricao") String descricao);
 
+    @Query("SELECT SUM(c.valor) FROM Conta c WHERE c.dataPagamento BETWEEN :dataInicio AND :dataFim")
+    Double obterTotalPagoPorPeriodo(@Param("dataInicio") LocalDate dataInicio, @Param("dataFim") LocalDate dataFim);
+
 }

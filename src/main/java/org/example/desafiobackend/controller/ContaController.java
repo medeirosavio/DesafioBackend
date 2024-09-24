@@ -49,6 +49,15 @@ public class ContaController {
                 .map(ResponseEntity::ok)
                 .orElse(ResponseEntity.notFound().build());
     }
+
+    @GetMapping("/total-pago")
+    public ResponseEntity<Double> obterTotalPagoPorPeriodo(
+            @RequestParam LocalDate dataInicio,
+            @RequestParam LocalDate dataFim) {
+        Double total = contaService.obterTotalPagoPorPeriodo(dataInicio, dataFim);
+        return ResponseEntity.ok(total);
+    }
+
 }
 
 

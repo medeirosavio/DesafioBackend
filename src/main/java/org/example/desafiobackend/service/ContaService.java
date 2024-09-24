@@ -53,4 +53,8 @@ public class ContaService {
         return contaRepository.findById(id);
     }
 
+    public Double obterTotalPagoPorPeriodo(LocalDate dataInicio, LocalDate dataFim) {
+        return contaRepository.obterTotalPagoPorPeriodo(dataInicio, dataFim);
+    }
+
 }
