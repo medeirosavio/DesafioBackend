@@ -5,10 +5,7 @@ import org.example.desafiobackend.service.ContaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api/contas")
@@ -22,4 +19,11 @@ public class ContaController {
         Conta novaConta = contaService.cadastrarConta(conta);
         return ResponseEntity.status(HttpStatus.CREATED).body(novaConta);
     }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<Conta> atualizarConta(@PathVariable Long id, @RequestBody Conta contaAtualizada) {
+        Conta conta = contaService.atualizarConta(id, contaAtualizada);
+        return ResponseEntity.ok(conta);
+    }
+
 }
