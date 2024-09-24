@@ -49,4 +49,8 @@ public class ContaService {
         return contaRepository.findByDataVencimentoAndDescricao(dataVencimento, descricao);
     }
 
+    public Optional<Conta> encontrarContaPorId(Long id) {
+        return contaRepository.findById(id);
+    }
+
 }

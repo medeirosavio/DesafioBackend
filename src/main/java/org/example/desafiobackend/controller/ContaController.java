@@ -43,4 +43,12 @@ public class ContaController {
         return ResponseEntity.ok(contas);
     }
 
+    @GetMapping("/{id}/buscar")
+    public ResponseEntity<Conta> encontrarContaPorId(@PathVariable Long id) {
+        return contaService.encontrarContaPorId(id)
+                .map(ResponseEntity::ok)
+                .orElse(ResponseEntity.notFound().build());
+    }
 }
+
+
