@@ -5,6 +5,8 @@ import org.example.desafiobackend.repository.ContaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -41,6 +43,10 @@ public class ContaService {
         } else {
             throw new RuntimeException("Conta não encontrada");
         }
+    }
+
+    public List<Conta> obterContasFiltradas(LocalDate dataVencimento, String descricao) {
+        return contaRepository.findByDataVencimentoAndDescricao(dataVencimento, descricao);
     }
 
 }
