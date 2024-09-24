@@ -31,4 +31,16 @@ public class ContaService {
             throw new RuntimeException("Conta não encontrada");
         }
     }
+
+    public Conta alterarSituacao(Long id, String novaSituacao) {
+        Optional<Conta> contaOptional = contaRepository.findById(id);
+        if (contaOptional.isPresent()) {
+            Conta contaExistente = contaOptional.get();
+            contaExistente.setSituacao(novaSituacao);
+            return contaRepository.save(contaExistente);
+        } else {
+            throw new RuntimeException("Conta não encontrada");
+        }
+    }
+
 }

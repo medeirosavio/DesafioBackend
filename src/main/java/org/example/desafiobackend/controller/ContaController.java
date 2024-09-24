@@ -26,4 +26,12 @@ public class ContaController {
         return ResponseEntity.ok(conta);
     }
 
+    @PatchMapping("/{id}/situacao")
+    public ResponseEntity<Conta> alterarSituacao(@PathVariable Long id, @RequestBody String novaSituacao) {
+        Conta conta = contaService.alterarSituacao(id, novaSituacao);
+        return ResponseEntity.ok(conta);
+    }
+
+
+
 }
